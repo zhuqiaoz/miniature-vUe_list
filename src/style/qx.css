@@ -1,0 +1,22 @@
+.clearfix:after, .clearfix:before {
+    content: " ";
+    display: table;
+}
+.clearfix:after {
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
+    clear: both;
+}
+
+.wrap{
+    width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+.qx-header{
+    text-align: center;
+    font-weight: 400;
+    font-size: 22px;
+}
