@@ -1,5 +1,5 @@
 <template>
-    <div class="headerwrap" slot="logo" >
+    <div class="headerwrap clearfix" slot="logo" >
         <header class="header" >
             <div class="wrap">
                 <div class="qx-header">

@@ -5,7 +5,9 @@
             </head-top>
             <main-left id="main-left">
                   <slot name="left"></slot>
+                  <slot name="right"></slot>
             </main-left>
+
       </div>
       
 </template>
@@ -18,7 +20,7 @@ import mainLeft from '../common/left'
 export default{
       components: {
             headTop,
-            mainLeft
+            mainLeft,
       }
 }
 </script>

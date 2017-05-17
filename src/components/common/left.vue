@@ -1,13 +1,15 @@
 <template>
-    <div class="qx-left" slot="left">
+    <div class="qx-left clearfix" slot="left">
         <div class="wrap">
             <ul>
                 <li v-for="(value,index) in arrs" :key="index">
-                    <router-link :to="'/'+value.type">
+                    <router-link :to="'/'+value.type"><i class="el-icon-menu"></i>
                         {{value.name}}
                     </router-link>
                 </li>
             </ul>
+
+            <router-view ></router-view>
         </div>
     </div>
 </template>
@@ -15,9 +17,13 @@
 .qx-left{
     margin-top: 20px;
 }
-ul{
-    width: 160px;
+.wrap{
     height: 100%;
+}
+ul{
+    width: 20%;
+    height: 100%;
+    float: left;
 }
 ul li{
     height: 55px;
@@ -25,6 +31,7 @@ ul li{
     text-align: center;
     background: #f5f5f5;
     color: #663399;
+    /*float: left;*/
     transition:  all .8s ease;
 }
 ul li:hover{
@@ -44,7 +51,11 @@ ul li:hover{
                     {type:'knowledge',name:'相关知识'},
                 ]
             }
+        },
+        methods: {
+            
         }
+
     }
 
 </script>

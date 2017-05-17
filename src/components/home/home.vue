@@ -2,7 +2,7 @@
     <div class="wrap clearfix">
         <div class="qx_left">
                 <div class="block">
-                    <el-carousel height="400px">
+                    <el-carousel height="500px">
                         <el-carousel-item v-for="item in arrs" :key="item">
                             <router-link to="/index">
                                 <img :src="item" :alt="msg" :title="msg" @click="reload">

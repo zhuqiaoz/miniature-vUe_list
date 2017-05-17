@@ -8,6 +8,7 @@ import './style/qx.css'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import FastClick from 'fastclick'
+// import ECharts from 'echarts'
 
 
 if ('addEventListener' in document) {
