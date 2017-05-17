@@ -1,7 +1,5 @@
 <template>
   <transition name="qx-fade" mode="out-in">
-    <!--<img src="./assets/logo.png">-->
-    <!--<router-link to="/hello">111</router-link>-->
     <router-view></router-view>
   </transition>
 </template>

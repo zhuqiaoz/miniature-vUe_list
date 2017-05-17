@@ -1,9 +1,15 @@
 <template>
     <div class="wrap clearfix">
         <div class="qx_left">
-            <router-link to="/home">
-                <img src="../../image/IMG20170516_113127.jpg" :alt="msg" :title="msg" @click="reload">
-            </router-link>
+                <div class="block">
+                    <el-carousel height="400px">
+                        <el-carousel-item v-for="item in arrs" :key="item">
+                            <router-link to="/index">
+                                <img :src="item" :alt="msg" :title="msg" @click="reload">
+                            </router-link>
+                        </el-carousel-item>
+                    </el-carousel>
+                </div>
         </div>
         <div class="qx_right">
             <h2>这是我可爱的小女儿：</h2>
@@ -12,9 +18,13 @@
                 <p>我家宝贝出生在：河南新乡第二人民医院,出生日期是：{{data}}。</p>
                 <p>做这个小东西是为了,纪念一些过去发生的事情。</p>
                 <div :style="marginTop">
-                   年龄: {{serccerfx}}
+                   年龄: 
+                   <span>
+                        {{SetDate}}{{SetMonth}}{{SetDay}}{{SetHours}}{{SetMinutes}}{{Seconds}}
+                   </span>
+                   
                 </div>
-                <router-link to="/head">详细信息--></router-link>
+                <router-link to="/index">详细信息--></router-link>
             </div>
         </div>
     </div>
@@ -24,49 +34,52 @@ export default{
     data () {
         return {
             msg:'沁曦',
-            data:'2016-11-19',
-            // age:'',
-            // SetDate:'',
-            // SetMonth:'',
-            // SetDay:'',
-            // SetHours:'',
-            // SetMinutes:'',    
+            data:'2016/11/19 19:11:30',
+            SetDate:'',
+            SetMonth:'',
+            SetDay:'',
+            SetHours:'',
+            SetMinutes:'',   
+            Seconds:'',
             marginTop:{
                 marginTop:'50px',
                 fontSize:'40px',
                 height:'75px',
                 lineHeight:'75px'
-            }
+            },
+            arrs:[
+                '/static/img/20170517-1.58c5d3c.jpg',
+                '/static/img/20170517-2.1a58e1a.jpg',
+                '/static/img/20170517-3.1652513.jpg',
+                '/static/img/20170517-4.91ea850.jpg',
+                '/static/img/20170517-5.facaa42.jpg',
+                '/static/img/20170517-6.b46609a.jpg',
+            ]
+
         }
     },
     methods: {
         reload:function(){
             window.location.reload();
+        },
+        time_select:function(){      
+            var timeSpan = new Date().getTime() - new Date(this.data).getTime();
+            var myDate = new Date(timeSpan);
+                myDate.toLocaleString(); //获取日期与时间<br>
+                this.SetDate =(new Date().getFullYear())-2016 +'岁';
+                this.SetMonth = myDate.getMonth() + "月";
+                this.SetDay = myDate.getDate() + "天";
+                this.SetHours = myDate.getHours() + "时";
+                this.SetMinutes = myDate.getMinutes() + "分";
+                this.Seconds = myDate.getSeconds()+'秒';
         }
 
     },
     computed: {
-        serccerfx:function(){
-        var timeSpan = new Date().getTime() - new Date("2016/11/19 19:11:30").getTime();
-        var myDate = new Date(timeSpan);
-            myDate.getYear(); //获取当前年份(2位)
-            myDate.getFullYear(); //获取完整的年份(4位,1970-????)
-            myDate.getMonth(); //获取当前月份(0-11,0代表1月)
-            myDate.getDate(); //获取当前日(1-31)
-            myDate.getDay(); //获取当前星期X(0-6,0代表星期天)
-            myDate.getTime(); //获取当前时间(从1970.1.1开始的毫秒数)
-            myDate.getHours(); //获取当前小时数(0-23)
-            myDate.getMinutes(); //获取当前分钟数(0-59)
-            myDate.getSeconds();
-            myDate.toLocaleDateString(); //获取当前日期
-            var mytime = myDate.toLocaleTimeString(); //获取当前时间
-            myDate.toLocaleString(); //获取日期与时间<br>
-
-            return(myDate.getFullYear()!="1970"?myDate.getFullYear() + "年" + myDate.getMonth() + "月" + myDate.getDate() + "天" + myDate.getHours() + "时" + myDate.getMinutes() + "分"+myDate.getSeconds()+"秒":myDate.getMonth() + "月" + myDate.getDate() + "天" + myDate.getHours() + "时" + myDate.getMinutes() + "分"+myDate.getSeconds()+"秒"); 
-        }
+        
     },
     mounted () {
-
+        setInterval(this.time_select,1000);
     }
 
 }
@@ -77,13 +90,16 @@ export default{
 .wrap{
     padding-top: 60px;
 }
+.block{
+    width: 500px;
+}
 .qx_left{
     float: left;
     padding: 0 10px;
 }
 .qx_right{
     float: left;
-    width: 769px;
+    width: 680px;
     text-align: center;
     position: relative;
     height: 400px;
@@ -106,4 +122,19 @@ export default{
     right: 110px;
     bottom: 10px;
 }
+ .el-carousel__item h3 {
+    color: #475669;
+    font-size: 14px;
+    opacity: 0.75;
+    line-height: 150px;
+    margin: 0;
+  }
+
+  .el-carousel__item:nth-child(2n) {
+     background-color: #99a9bf;
+  }
+  
+  .el-carousel__item:nth-child(2n+1) {
+     background-color: #d3dce6;
+  }
 </style>

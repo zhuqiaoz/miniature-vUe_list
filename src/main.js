@@ -4,7 +4,9 @@ import App from './App'
 import routes from './router/router.config'
 import './style/reset.css'
 import './style/qx.css'
-import {icon} from 'element-ui'
+// import {icon,Carousel,CarouselItem } from 'element-ui'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-default/index.css'
 import FastClick from 'fastclick'
 
 
@@ -17,7 +19,9 @@ if ('addEventListener' in document) {
 
 Vue.config.productionTip = false
 
-Vue.use(VueRouter,icon)
+Vue.use(ElementUI)
+// Vue.use(VueRouter,icon,Carousel,CarouselItem)
+Vue.use(VueRouter)
 
 
 const router = new VueRouter({routes})

@@ -1,15 +1,27 @@
 <template>
-    <div class="headerwrap">
-        <header class="header">
+    <div class="headerwrap" slot="logo" >
+        <header class="header" >
             <div class="wrap">
                 <div class="qx-header">
                     <i class="el-icon-star-on"></i>
-                    <span>沁曦化验报告总计</span>
+                    <span>沁曦</span>
                 </div>
             </div>
         </header>
     </div>
 </template>
+<script>
+export default{
+    data () {
+        return {
+            
+        }
+    },
+    mounted () {
+        document.title="沁曦结果筛查"
+    }
+}
+</script>
 <style scoped>
 #headerwrap{
     height: 65px;
@@ -30,18 +42,3 @@
     box-sizing: border-box;
 }
 </style>
-<script>
-import Left_qx from './left.vue'
-
-export default{
-    data () {
-        return {
-            
-        }
-    },
-    components: {
-        Left_qx
-    }
-}
-
-</script>
