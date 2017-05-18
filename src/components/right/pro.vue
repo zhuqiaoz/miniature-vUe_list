@@ -1,5 +1,8 @@
 <template>
-    <div>
+    <div class="input clearfix">
+        <bread-crumb>
+            <slot name="bread"></slot>
+        </bread-crumb>
         <el-form :inline="true" :model="formInline" class="demo-form-inline">
         <el-form-item label="活动区域">
             <el-select v-model="formInline.region" placeholder="活动区域">
@@ -17,6 +20,7 @@
     </div>
 </template>
 <script>
+  import breadCrumb from '../Breadcrumb/bread'
   export default {
     data() {
       return {
@@ -30,6 +34,9 @@
       onSubmit() {
         console.log('submit!');
       }
+    },
+    components: {
+      breadCrumb
     }
   }
 </script>

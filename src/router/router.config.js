@@ -19,12 +19,12 @@ export default[{
     { path : '/home' , component:home },
     { path : '/index' , component:index , children : [
         { path : '/left' , component : left },
-        { path : '/input' , component : input},
-        { path : '/Analysis' , component : Analysis},
-        { path : '/contrast' , component : contrast},
-        { path : '/history' , component : history},
-        { path : '/knowledge' , component : knowledge},
-        { path : '/pro' , component : pro},
+        { path : '/input' , component : input,meta: ['结果输入']},
+        { path : '/Analysis' , component : Analysis,meta: ['化验项目']},
+        { path : '/contrast' , component : contrast,meta:['结果对比']},
+        { path : '/history' , component : history,meta:['结果分析']},
+        { path : '/knowledge' , component : knowledge,meta:['历史项目']},
+        { path : '/pro' , component : pro,meta:['相关知识']},
     ]},
     
   ]

@@ -3,7 +3,7 @@
         <div class="qx_left">
                 <div class="block">
                     <el-carousel height="500px">
-                        <el-carousel-item v-for="item in arrs" :key="item">
+                        <el-carousel-item v-for="(item,index) in arrs" :key="index">
                             <router-link to="/index">
                                 <img :src="item" :alt="msg" :title="msg" @click="reload">
                             </router-link>
@@ -30,9 +30,18 @@
     </div>
 </template>
 <script>
+    import a from '../../image/20170517-1.jpg'
+    import b from '../../image/20170517-2.jpg'
+    import c from '../../image/20170517-3.jpg'
+    import d from '../../image/20170517-4.jpg'
+    import e from '../../image/20170517-5.jpg'
+    import f from '../../image/20170517-6.jpg'
 export default{
     data () {
         return {
+            arrs:[
+                a,b,c,d,e,f
+            ],
             msg:'沁曦',
             data:'2016/11/19 19:11:30',
             SetDate:'',
@@ -47,14 +56,6 @@ export default{
                 height:'75px',
                 lineHeight:'75px'
             },
-            arrs:[
-                '/static/img/20170517-1.58c5d3c.jpg',
-                '/static/img/20170517-2.1a58e1a.jpg',
-                '/static/img/20170517-3.1652513.jpg',
-                '/static/img/20170517-4.91ea850.jpg',
-                '/static/img/20170517-5.facaa42.jpg',
-                '/static/img/20170517-6.b46609a.jpg',
-            ]
 
         }
     },

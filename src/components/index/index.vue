@@ -5,7 +5,6 @@
             </head-top>
             <main-left id="main-left">
                   <slot name="left"></slot>
-                  <slot name="right"></slot>
             </main-left>
 
       </div>
