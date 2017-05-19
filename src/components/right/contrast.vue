@@ -1,76 +1,76 @@
 <template>
-    <div style="float:left">
+    <div class="input clearfix">
        <bread-crumb>
             <slot name="bread"></slot>
         </bread-crumb>
-        <el-form :model="dynamicValidateForm" ref="dynamicValidateForm" label-width="100px" class="demo-dynamic">
-            <el-form-item   prop="email" label="邮箱" :rules="[{ required: true, message: '请输入邮箱地址', trigger: 'blur' },{ type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur,change' }]" >
-                <el-input v-model="dynamicValidateForm.email"></el-input>
-            </el-form-item>
-            <el-form-item
-                v-for="(domain, index) in dynamicValidateForm.domains"
-                :label="'域名' + index"
-                :key="domain.key"
-                :prop="'domains.' + index + '.value'"
-                :rules="{required: true, message: '域名不能为空', trigger: 'blur'}">
-                <el-input v-model="domain.value"></el-input>
-                <el-button @click.prevent="removeDomain(domain)">删除</el-button>
-            </el-form-item>
-            <el-form-item>
-                <el-button type="primary" @click="submitForm('dynamicValidateForm')">提交</el-button>
-                <el-button @click="addDomain">新增域名</el-button>
-                <el-button @click="resetForm('dynamicValidateForm')">重置</el-button>
-            </el-form-item>
-        </el-form>
+        <div id="box"></div>
     </div>
 </template>
-<style>
-
+<style scoped>
+#box{
+  width: 1000px;
+  height: 500px;
+}
 </style>
 <script>
   import breadCrumb from '../Breadcrumb/bread'
+  import ECharts from 'echarts'
   export default {
-    data() {
+    data () {
       return {
-        dynamicValidateForm: {
-          domains: [{
-            value: ''
-          }],
-          email: ''
-        }
-      };
-    },
-    methods: {
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!');
-            console.log(this.$refs[formName].model)
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
-      },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
-      },
-      removeDomain(item) {
-        var index = this.dynamicValidateForm.domains.indexOf(item)
-        if (index !== -1) {
-          this.dynamicValidateForm.domains.splice(index, 1)
-        }
-      },
-      addDomain() {
-        this.dynamicValidateForm.domains.push({
-          value: '',
-          key: Date.now()
-        });
-      },
-     
-    },
-     components: {
-        breadCrumb
+        
       }
+    },
+    components: {
+      breadCrumb
+    },
+    mounted () {
+       var myChart = ECharts.init(document.getElementById('box'));
+    myChart.setOption({
+        title:{text:'环形图'},
+        tooltip: {
+          trigger: 'item',
+          formatter: "{a} <br/>{b}: {c} ({d}%)"
+      },
+      legend: {
+          // orient: 'vertical',
+          // x: 'center',
+          data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+      },
+      series: [
+          {
+              name:'访问来源',
+              type:'pie',
+              radius: ['50%', '70%'],
+              avoidLabelOverlap: false,
+              label: {
+                  normal: {
+                      show: false,
+                      position: 'center'
+                  },
+                  emphasis: {
+                      show: true,
+                      textStyle: {
+                          fontSize: '30',
+                          fontWeight: 'bold'
+                      }
+                  }
+              },
+              labelLine: {
+                  normal: {
+                      show: false
+                  }
+              },
+              data:[
+                  {value:335, name:'直接访问'},
+                  {value:310, name:'邮件营销'},
+                  {value:234, name:'联盟广告'},
+                  {value:135, name:'视频广告'},
+                  {value:1548, name:'搜索引擎'}
+              ]
+          }
+      ]
+       })
+    }
   }
 </script>

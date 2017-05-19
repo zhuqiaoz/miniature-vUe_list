@@ -53,6 +53,11 @@
         padding-left: 40px;
     }
 </style>
+<style scoped>
+.el-col-2{
+    text-align: center;
+}
+</style>
 
 <script>
     import breadCrumb from '../Breadcrumb/bread'

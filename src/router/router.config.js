@@ -20,11 +20,11 @@ export default[{
     { path : '/index' , component:index , children : [
         { path : '/left' , component : left },
         { path : '/input' , component : input,meta: ['结果输入']},
-        { path : '/Analysis' , component : Analysis,meta: ['化验项目']},
+        { path : '/Analysis' , component : Analysis,meta: ['结果分析']},
         { path : '/contrast' , component : contrast,meta:['结果对比']},
-        { path : '/history' , component : history,meta:['结果分析']},
-        { path : '/knowledge' , component : knowledge,meta:['历史项目']},
-        { path : '/pro' , component : pro,meta:['相关知识']},
+        { path : '/history' , component : history,meta:['历史项目']},
+        { path : '/knowledge' , component : knowledge,meta:['相关知识']},
+        { path : '/pro' , component : pro,meta:['化验项目']},
     ]},
     
   ]

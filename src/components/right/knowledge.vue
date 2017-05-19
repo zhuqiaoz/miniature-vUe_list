@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="input clearfix">
         <bread-crumb>
             <slot name="bread"></slot>
         </bread-crumb>
