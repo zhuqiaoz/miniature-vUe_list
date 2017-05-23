@@ -32,7 +32,7 @@
                     </el-select>
                 </el-form-item>
                 
-                <el-form-item label="结果" :prop="'domains.' + index + '.value'" style="display:inline-block" :rules="[{ required: true, message: '结果不能为空', trigger: 'blur' },{ type: 'number', message: '结果只能是数字', trigger: 'change' }]">
+                <el-form-item label="结果" :prop="'domains.' + index + '.value'" style="display:inline-block" :rules="[{ required: true, message: '结果不能为空', trigger: 'blur' }]">
                     <el-input v-model="domain.value"></el-input>
                 </el-form-item>
             </div>
@@ -93,7 +93,24 @@ export default {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            console.log(this.$refs[formName].model)
+            // console.log(this.$refs[formName].model)
+            this.$http.get('/api/login/getAccount')
+                .then((response) => {
+                    // 响应成功回调
+                    console.log(response)
+                    let params = { 
+                    account : this.account,
+                    password : this.password
+                    };
+                    // 创建一个账号密码
+                    return this.$http.post('/api/login/createAccount',params);
+                })
+                .then((response) => {
+                    console.log(response)
+                })
+                .catch((reject) => {
+                    console.log(reject)
+                });
           } else {
             console.log(this.$refs[formName].model)
             console.log('error submit!!');
