@@ -72,7 +72,6 @@ export default {
             domains:[
                 {prop:'',value:''}
             ],
-            
         },
         
         rules: {
@@ -93,39 +92,33 @@ export default {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            // console.log(this.$refs[formName].model)
-            this.$http.get('/api/login/getAccount')
+            this.$http.get('/api/Check/getAccount')
                 .then((response) => {
                     // 响应成功回调
-                    console.log(response)
                     let params = { 
-                    account : this.account,
-                    password : this.password
+                        hospitalName : this.ruleForm.name,
+                        checkData1 : Date.parse(this.ruleForm.date1)/1000,
+                        checkData2 : Date.parse(this.ruleForm.date2)/1000,
+                        checkPro : this.ruleForm.domains[0].prop,
+                        checkRes : this.ruleForm.domains[0].value,
                     };
+                    console.log(params)
                     // 创建一个账号密码
-                    return this.$http.post('/api/login/createAccount',params);
-                })
-                .then((response) => {
-                    console.log(response)
-                })
-                .catch((reject) => {
+                    return this.$http.post('/api/Check/createAccount',params);
+                }) .catch((reject) => {
                     console.log(reject)
                 });
           } else {
-            console.log(this.$refs[formName].model)
             console.log('error submit!!');
             return false;
           }
         });
       },
       resetForm(formName) {
-          console.log(this.$refs[formName].model)
-        this.$refs[formName].resetFields();
+          this.$refs[formName].resetFields();
       },
       addprop(){
         this.ruleForm.domains.push({value:'',prop:'',key: Date.now()})
-
-        console.log(this.ruleForm.domains)
       }
     },
     components: {

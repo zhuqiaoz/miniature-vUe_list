@@ -31,8 +31,18 @@
     },
     methods: {
       onSubmit() {
-        console.log('submit!');
-        console.log(this.$route)
+        this.$http.get('/api/Pro/getAccount')
+                .then((response) => {
+                    // 响应成功回调
+                    //console.log(response)
+                    let params = { 
+                     pro : this.formInline.prop
+                  };
+                  console.log(params);
+                    return this.$http.post('/api/Pro/createAccount',params);
+                }).catch((reject) => {
+                    console.log(reject)
+                });
       }
     },
     components: {
