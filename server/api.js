@@ -1,4 +1,3 @@
-// 可能是我的node版本问题，不用严格模式使用ES6语法会报错
 "use strict";
 const models = require('./db');
 const express = require('express');
@@ -10,11 +9,12 @@ const router = express.Router();
 router.post('/api/Check/createAccount',(req,res) => {
     // 这里的req.body能够使用就在index.js中引入了const bodyParser = require('body-parser')
     let newAccount = new models.Check({
-        pro : req.body.pro,
         hospitalName : req.body.hospitalName,
-        checkData : req.body.checkData,
-        checkPro : req.body.checkPro,
-        checkRes : req.body.checkRes,
+        checkData1 : req.body.checkData1,
+        checkData2 : req.body.checkData2,
+        checkPro1 :  req.body.checkPro1,
+        checkRes1 :  req.body.checkRes1,
+        
     });
     // 保存数据newAccount数据进mongoDB
     newAccount.save((err,data) => {

@@ -3,18 +3,19 @@
         <bread-crumb>
             <slot name="bread"></slot>
         </bread-crumb>
-        <el-form :inline="true" :rules='rules' :model="formInline" class="demo-form-inline">
-        <el-form-item label="添加化验项目:" prop="prop">
-            <el-input v-model="formInline.prop" placeholder="添加化验项目"></el-input>
-        </el-form-item>
-        <el-form-item>
-            <el-button type="primary" @click="onSubmit">提交</el-button>
-        </el-form-item>
+        <el-form :inline="true" :rules='rules' ref="formInline" :model="formInline" class="demo-form-inline">
+          <el-form-item label="添加化验项目:" prop="prop">
+              <el-input v-model="formInline.prop" placeholder="添加化验项目"></el-input>
+          </el-form-item>
+          <el-form-item>
+              <el-button type="primary" @click="submitForm('formInline')">提交</el-button>
+          </el-form-item>
         </el-form>
     </div>
 </template>
 <script>
   import breadCrumb from '../Breadcrumb/bread'
+  import axios from 'axios'
   export default {
     data() {
       return {
@@ -30,23 +31,37 @@
       }
     },
     methods: {
-      onSubmit() {
-        this.$http.get('/api/Pro/getAccount')
+ submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            	  axios.get('/api/Pro/getAccount')
                 .then((response) => {
-                    // 响应成功回调
-                    //console.log(response)
                     let params = { 
                      pro : this.formInline.prop
                   };
-                  console.log(params);
-                    return this.$http.post('/api/Pro/createAccount',params);
+                   axios.post('/api/Pro/createAccount',params);
+                   this.$notify({
+                        title: '成功',
+                        message: '数据插入成功',
+                        type: 'success'
+                      });
+                   this.formInline.prop='';
                 }).catch((reject) => {
                     console.log(reject)
                 });
-      }
+          } else {
+            this.$notify.error({
+              title: '错误',
+              message: '数据插入失败'
+            });
+            return false;
+          }
+        });
+      },
     },
     components: {
       breadCrumb
-    }
+    },
+    
   }
 </script>

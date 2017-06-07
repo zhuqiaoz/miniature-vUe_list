@@ -21,22 +21,17 @@
                 </el-col>
             </el-form-item>
 
-            <div v-for="(domain, index) in ruleForm.domains" :key="domain.key">
-                <el-form-item label="检查项目" :prop="'domains.' + index + '.prop'" style="display:inline-block" :rules="{required: true, message: '检查项目不能为空', trigger: 'change'}">
-                    <el-select v-model="domain.prop" placeholder="检查项目">
-                        <el-option label="TSH" value="TSH"></el-option>
-                        <el-option label="FT3" value="FT3"></el-option>
-                        <el-option label="FT4" value="FT4"></el-option>
-                        <el-option label="TT3" value="TT3"></el-option>
-                        <el-option label="TT4" value="TT4"></el-option>
+            <div v-for="(domain, index) in ruleForm.domains" :key="domain.key" >
+                <el-form-item label="检查项目" :prop="'domains.' + index + '.prop'"  style="display:inline-block" :rules="{required: true, message: '检查项目不能为空', trigger: 'change'}">
+                    <el-select v-model="domain.prop"  placeholder="检查项目">
+                        <el-option :label="items.pro" :value="items.pro" v-for="items in ruleForm.propdata" :key="items.id"></el-option>
                     </el-select>
                 </el-form-item>
-                
+                <!--v-for="items in ruleForm.propdata" :key="items.id" -->
                 <el-form-item label="结果" :prop="'domains.' + index + '.value'" style="display:inline-block" :rules="[{ required: true, message: '结果不能为空', trigger: 'blur' }]">
                     <el-input v-model="domain.value"></el-input>
                 </el-form-item>
             </div>
-
             <el-form-item>
                 <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
                 <el-button type="info" icon="edit"  @click="addprop">新增项目和结果</el-button>
@@ -60,7 +55,8 @@
 </style>
 
 <script>
-    import breadCrumb from '../Breadcrumb/bread'
+    import breadCrumb from '../Breadcrumb/bread';
+    import axios from 'axios'
 export default {
     data() {
       return {
@@ -72,6 +68,7 @@ export default {
             domains:[
                 {prop:'',value:''}
             ],
+            propdata:'',
         },
         
         rules: {
@@ -92,24 +89,29 @@ export default {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.$http.get('/api/Check/getAccount')
+            axios.get('/api/Check/getAccount')
                 .then((response) => {
-                    // 响应成功回调
                     let params = { 
                         hospitalName : this.ruleForm.name,
                         checkData1 : Date.parse(this.ruleForm.date1)/1000,
                         checkData2 : Date.parse(this.ruleForm.date2)/1000,
-                        checkPro : this.ruleForm.domains[0].prop,
-                        checkRes : this.ruleForm.domains[0].value,
+                        checkPro1 : this.ruleForm.domains[0].prop,
+                        checkRes1 : this.ruleForm.domains[0].value,
                     };
-                    console.log(params)
-                    // 创建一个账号密码
-                    return this.$http.post('/api/Check/createAccount',params);
+                  axios.post('/api/Check/createAccount',params);
+                  this.$notify({
+                        title: '成功',
+                        message: '数据插入成功',
+                        type: 'success'
+                      });
                 }) .catch((reject) => {
                     console.log(reject)
                 });
           } else {
-            console.log('error submit!!');
+            this.$notify.error({
+              title: '错误',
+              message: '数据插入失败'
+            });
             return false;
           }
         });
@@ -123,6 +125,20 @@ export default {
     },
     components: {
         breadCrumb
+    },
+    mounted () {
+        axios.get('/api/Pro/getAccount').then((res)=>{
+            // this.ruleForm.propdata.push(res.data);
+            this.ruleForm.propdata = res.data
+            // console.log(this.ruleForm.propdata)
+        }).catch((reject) => {
+                    console.log(reject)
+                });
+    },
+    computed: {
+        params(){
+
+        }
     }
   }
 </script>
