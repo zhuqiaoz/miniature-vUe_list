@@ -63,6 +63,7 @@ export default {
         ruleForm: {
             name: '',
             date: '',
+            date1 : '',
             domains:[
                 {prop:'',value:''}
             ],
@@ -98,14 +99,17 @@ export default {
                         // checkRes1 : this.ruleForm.domains[0].value,
                         check : this.ruleForm,  
                     };
-                  axios.post('/api/Check/createAccount',params);
-                  this.$notify({
-                        title: '成功',
-                        message: '数据插入成功',
-                        type: 'success'
-                      });
+                  axios.post('/api/Check/createAccount',params).then((res)=>{
+                        this.$notify({
+                            title: '成功',
+                            message: '数据插入成功',
+                            type: 'success'
+                        });  
+                         this.$refs[formName].resetFields();
+                  })
+                                      
                 }) .catch((reject) => {
-                });
+                });           
           } else {
             this.$notify.error({
               title: '错误',
@@ -119,7 +123,8 @@ export default {
         this.$refs[formName].resetFields();
       },
       checkdate(val){
-           return Date.parse(val)/1000;  //时间戳
+           return  this.ruleForm.date1 = Date.parse(val)/1000;
+
       },
       addprop(){
         this.ruleForm.domains.push({value:'',prop:'',key: Date.now()})
