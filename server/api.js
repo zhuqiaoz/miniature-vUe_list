@@ -9,11 +9,13 @@ const router = express.Router();
 router.post('/api/Check/createAccount',(req,res) => {
     // 这里的req.body能够使用就在index.js中引入了const bodyParser = require('body-parser')
     let newAccount = new models.Check({
-        hospitalName : req.body.hospitalName,
-        checkData1 : req.body.checkData1,
-        checkData2 : req.body.checkData2,
-        checkPro1 :  req.body.checkPro1,
-        checkRes1 :  req.body.checkRes1,
+        /* 使用数组的方式来实现多个项目或者单个项目的至 */
+        // hospitalName : req.body.hospitalName,
+        // checkData1 : req.body.checkData1,
+        // checkData2 : req.body.checkData2,
+        // checkPro1 :  req.body.checkPro1,
+        // checkRes1 :  req.body.checkRes1,
+        check : req.body.check,
         
     });
     // 保存数据newAccount数据进mongoDB

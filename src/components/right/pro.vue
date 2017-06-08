@@ -40,20 +40,22 @@
                      pro : this.formInline.prop
                   };
                    axios.post('/api/Pro/createAccount',params);
-                   this.$notify({
-                        title: '成功',
-                        message: '数据插入成功',
-                        type: 'success'
-                      });
+                   this.$message({
+                            message: '数据插入成功',
+                            duration :1000,
+                            type: 'success'
+                          });
                    this.formInline.prop='';
                 }).catch((reject) => {
                     console.log(reject)
                 });
           } else {
-            this.$notify.error({
-              title: '错误',
-              message: '数据插入失败'
-            });
+            this.$message({
+              message: '错误,数据错误',
+              duration :0,
+              showClose : true,
+              type:'error',
+            })
             return false;
           }
         });

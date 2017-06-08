@@ -24,11 +24,13 @@ db.on('close', function() {
 // https://cnodejs.org/topic/4f71363f8a04d82a3d1e4aea
 // https://cnodejs.org/topic/548167933098e8df0a116fb0
 const checkSchema = mongoose.Schema({
-    hospitalName : String,
-    checkData1 : String,
-    checkData2 : String,
-    checkPro1 : String,
-    checkRes1 : Number,
+    /* 使用数组的方式来实现多个项目或者单个项目的至 */
+    // hospitalName : String,
+    // checkData1 : String,
+    // checkData2 : String,
+    // checkPro1 : String,
+    // checkRes1 : Number,
+    check:Array,
 });
 
 const proSchema = mongoose.Schema({
