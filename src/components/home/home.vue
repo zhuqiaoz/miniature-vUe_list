@@ -30,12 +30,12 @@
     </div>
 </template>
 <script>
-    import a from '../../image/20170517-1.jpg'
-    import b from '../../image/20170517-2.jpg'
-    import c from '../../image/20170517-3.jpg'
-    import d from '../../image/20170517-4.jpg'
-    import e from '../../image/20170517-5.jpg'
-    import f from '../../image/20170517-6.jpg'
+    import a from '../../assets/20170517-1.jpg'
+    import b from '../../assets/20170517-2.jpg'
+    import c from '../../assets/20170517-3.jpg'
+    import d from '../../assets/20170517-4.jpg'
+    import e from '../../assets/20170517-5.jpg'
+    import f from '../../assets/20170517-6.jpg'
 export default{
     data () {
         return {
