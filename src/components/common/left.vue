@@ -34,13 +34,13 @@ export default{
     },
     computed: {
 			defaultActive: function(){
-				return this.$route.path.replace('/', '');
+				return this.$route.path.replace('/input', '');
 			}
 		},
     mounted () {
         axios.get('/api/Listitem').then(res=>{
             this.item_list = res.data.list
-        })
+        });
     }
 }
 

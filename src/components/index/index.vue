@@ -20,6 +20,9 @@ export default{
       components: {
             headTop,
             mainLeft,
-      }
+      },
+      // mounted () {
+      //       this.$route.path.replace('/', '');
+      // }
 }
 </script>
