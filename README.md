@@ -1,9 +1,9 @@
 # vue_demo_three
 
-##技术栈
+## 技术栈
 vue2+vue-router+webpack+ES6+mongoodb+node+mongoose+(mock+aixo)
 
-#说明
+# 说明
 > 一个简单的Vue单页项目，用来展示沁曦疾病监控的。
 > 输入结果前，需要先维护医院名称。
 > 医院名称需要连接mongoodb
